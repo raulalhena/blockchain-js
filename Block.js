@@ -1,4 +1,8 @@
-import crypto from "crypto";
+// import crypto from "crypto";
+
+// let sha256Hasher = new jsSHA("SHA-256", this.timestamp + this.previousHahs + this.value, { numRounds: 1 });
+// hashObj.update(pwdObj.value);
+// var hash = hashObj.getHash("HEX");
 
 export default class Block {
 
@@ -11,8 +15,11 @@ export default class Block {
     }
 
     calculateHash() {
-        const sha256Hasher = crypto.createHmac("sha256", this.timestamp + this.previousHahs + this.value);
-        return sha256Hasher.update(JSON.stringify(this.transactions)).digest("hex");
+        let sha256Hasher = new jsSHA("SHA-256", "TEXT", { numRounds: 1 });
+        // const sha256Hasher = crypto.createHmac("sha256", this.timestamp + this.previousHahs + this.value);
+        // return sha256Hasher.update(JSON.stringify(this.transactions)).digest("hex");
+        sha256Hasher.update(JSON.stringify(this.timestamp + this.previousHahs + this.value + this.transactions));
+        return sha256Hasher.getHash("HEX");
     }
 
     mintBlock(dificulty) {
@@ -22,6 +29,6 @@ export default class Block {
             this.hash = this.calculateHash();
         }
 
-        console.log(`Minted block: ${this.hash}`);
+        // console.log(`Minted block: ${this.hash}`);
     }
 }

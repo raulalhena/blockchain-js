@@ -5,7 +5,7 @@ export default class Blockchain {
 
     constructor() {
         this.chain = [this.createGensisBlock()];
-        this.dificulty = 3;
+        this.dificulty = 1;
         this.pendingTransactions = [];
         this.miningReward = 100;
     }
@@ -33,7 +33,7 @@ export default class Blockchain {
         block.previousHahs = this.getLastBlock().hash;
         block.mintBlock(this.dificulty);
 
-        console.log(`Block minted successfully`);
+        console.log(`Block minted successfully`, block);
 
         this.chain.push(block);
 
@@ -45,7 +45,7 @@ export default class Blockchain {
     getBalanceOfAddress(address) {
         let balance = 0;
 
-        for (const block in this.chain) {
+        for (const block of this.chain) {
             for (const transaction of block.transactions) {
                 if (transaction.fromAddres === address) {
                     balance -= transaction.amount;

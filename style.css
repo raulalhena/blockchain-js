@@ -1,0 +1,24 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    padding: 30px;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+main section {
+    border: 1px solid #3c3c3c;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 95%;
+    padding: 20px 20px;
+}
